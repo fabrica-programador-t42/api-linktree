@@ -5,6 +5,7 @@ function carregarRotas(app) {
     for (const nome of nomesDosArquivos) {
         if(nome != 'index.js') {
             console.log(`Carregando ${nome}`)
+            //require(`./${nome}`)(app)
             const rota = require(`./${nome}`)
             rota(app)
         } 
