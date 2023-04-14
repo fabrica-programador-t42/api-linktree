@@ -5,6 +5,11 @@ const UsuarioSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    ativo: {
+        type: Boolean,
+        required: true,
+        default: true
+    },
     email: {
         type: String,
         required: true,
@@ -34,6 +39,5 @@ const UsuarioSchema = new mongoose.Schema({
 
 
 const UsuarioModel = mongoose.model('Usuario', UsuarioSchema)
-
 
 module.exports = UsuarioModel
