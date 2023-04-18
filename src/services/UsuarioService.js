@@ -8,6 +8,9 @@ class UsuarioService extends BaseService {
         super(model)
     }
 
+
+    
+
     async buscarTodosAtivos() {
         try {
             return await this.model.find({ ativo: true })

@@ -9,6 +9,21 @@ module.exports = Object.freeze({
             mensagem: 'Ocorreu um erro ao criar o regitro',
             statusCode: 422,
             code: 'GEN0001'
+        },
+        idNaoInformado: {
+            mensagem: 'O campo ID não foi informado',
+            statusCode: 400,
+            code: 'GEN0003'
+        },
+        erroAoAtualizarRegistro: {
+            mensagem: 'Ocorreu um erro ao atualizar o registro',
+            statusCode: 422,
+            code: 'GEN0004'
+        },
+        erroAoDeletarRegistro: {
+            mensagem: 'Ocorreu um erro ao deletar o registro',
+            statusCode: 422,
+            code: 'GEN0005'
         }
     },
     usuario: {
