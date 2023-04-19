@@ -36,6 +36,16 @@ module.exports = Object.freeze({
             mensagem: 'Um erro ocorreu ao criar o Usuario',
             statusCode: 422,
             code: 'USU0002',
+        },
+        usuarioNaoEncontrado: {
+            mensagem: 'Usuario não encontrado',
+            statusCode: 400,
+            code: 'USU0003'
+        },
+        erroAoInserirLink : {
+            mensagem: 'Ocorreu um erro ao inserir o link',
+            statusCode: 422,
+            code: 'USU0004'
         }
     }
 })

@@ -30,7 +30,7 @@ class BaseService {
             throw erros.geral.idNaoInformado
         }
         try {
-            const atualizado = await this.model.findOneAndUpdate({_id: id}, dados)
+            const atualizado = await this.model.findOneAndUpdate({_id: id}, dados, {new: true, upsert: false})
             return atualizado
         } catch (error) {
             console.log(error)
