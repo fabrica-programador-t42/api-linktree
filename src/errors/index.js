@@ -46,6 +46,11 @@ module.exports = Object.freeze({
             mensagem: 'Ocorreu um erro ao inserir o link',
             statusCode: 422,
             code: 'USU0004'
+        },
+        linkNaoEncontrado: {
+            mensagem: 'Link não encontrado',
+            statusCode: 400,
+            code: 'USU0005'
         }
     }
 })

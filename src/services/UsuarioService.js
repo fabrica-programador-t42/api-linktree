@@ -39,12 +39,37 @@ class UsuarioService extends BaseService {
         }
     }
 
+    async buscarUsuarioPorId(id){
+        const usuario = await this.model.findOne({ _id: id })
+        if(!usuario || !usuario._id) {
+            throw erros.usuario.usuarioNaoEncontrado
+        }
+        return usuario
+    }
+
+    async editarLink(idDoUsuario, dados){
+        const usuario = await this.buscarUsuarioPorId(idDoUsuario)
+        const indexLink = usuario.links.findIndex(link => link._id == dados._id)
+        
+        if(indexLink == -1) {
+            throw erros.usuario.linkNaoEncontrado
+        }
+        const copia = usuario.links[indexLink]
+
+        usuario.links[indexLink] = {
+            _id: copia._id,
+            nome: dados.nome || copia.nome,
+            tipo: copia.tipo,
+            url: dados.url || copia.url
+        }
+        const resultado = await this.atualizar(usuario._id, usuario)
+        return resultado
+    }
+
+
     async adicionarLink(idUsuario, dados) {
         try {
-            const usuario = await this.model.findOne({ _id: idUsuario })
-            if(!usuario || !usuario._id) {
-                throw erros.usuario.usuarioNaoEncontrado
-            }
+            const usuario = await this.buscarUsuarioPorId(idUsuario)
             usuario.links.push({
                 tipo: dados.tipo,
                 nome: dados.nome,
@@ -58,6 +83,8 @@ class UsuarioService extends BaseService {
             throw erros.usuario.erroAoInserirLink
         }
     }
+
+
 }
 
 

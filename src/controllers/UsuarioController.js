@@ -57,6 +57,18 @@ class UsuarioController {
             return res.status(error.statusCode || 500).send(error)
         }
     }
+
+    async editarLink(req, res) {
+        try {
+            const idUsuario = req.params.id;
+            const dados = req.body
+            const resultado = await this.usuarioService.editarLink(idUsuario, dados)
+            return res.status(200).send(resultado)
+        } catch (error) {
+            console.log(error)
+            return res.status(error.statusCode || 500).send(error)
+        }
+    }
 }
 
 module.exports = UsuarioController
