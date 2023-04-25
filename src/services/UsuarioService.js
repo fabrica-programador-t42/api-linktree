@@ -40,11 +40,32 @@ class UsuarioService extends BaseService {
     }
 
     async buscarUsuarioPorId(id){
-        const usuario = await this.model.findOne({ _id: id })
+        const usuario = await this.model.findOne({
+            _id: id 
+        })
         if(!usuario || !usuario._id) {
             throw erros.usuario.usuarioNaoEncontrado
         }
         return usuario
+    }
+
+    async deletarLink(idDoUsuario, idDoLink) {
+        const usuario = await this.buscarUsuarioPorId(
+            idDoUsuario
+        )
+        const indexLink = usuario.links.findIndex(
+            link => link._id == idDoLink
+        )
+        if(indexLink == -1) {
+            throw erros.usuario.linkNaoEncontrado
+        }
+        usuario.links.splice(indexLink, 1)
+        
+        const resultado = await this.atualizar(
+            usuario._id, 
+            usuario
+        )
+        return resultado
     }
 
     async editarLink(idDoUsuario, dados){
@@ -65,6 +86,8 @@ class UsuarioService extends BaseService {
         const resultado = await this.atualizar(usuario._id, usuario)
         return resultado
     }
+
+
 
 
     async adicionarLink(idUsuario, dados) {

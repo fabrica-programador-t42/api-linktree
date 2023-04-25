@@ -9,6 +9,7 @@ function rota(app) {
     app.delete('/usuarios/:id', (req, res) => controller.deletarUsuario(req, res))
     app.put('/usuarios/adicionar-link/:id', (req, res) => controller.adicionarLink(req, res))
     app.put('/usuarios/editar-link/:id', (req, res) => controller.editarLink(req, res))
+    app.put('/usuarios/deletar-link/:id', (req, res) => controller.deletarLink(req, res))
 }
 
 module.exports = rota

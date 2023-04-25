@@ -69,6 +69,25 @@ class UsuarioController {
             return res.status(error.statusCode || 500).send(error)
         }
     }
+
+    async deletarLink(req, res) {
+        console.log(req)
+        try {
+            const idUsuario = req.params.id;
+            const idDoLink = req.body.idDoLink
+            const resultado = await this.usuarioService
+                .deletarLink(idUsuario, idDoLink)
+            return res
+                .status(200)
+                .send(resultado)
+                
+        } catch (error) {
+            console.log(error)
+            return res
+                .status(error.statusCode || 500)
+                .send(error)
+        }
+    }
 }
 
 module.exports = UsuarioController
