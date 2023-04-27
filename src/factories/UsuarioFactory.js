@@ -6,7 +6,11 @@ const TokenService = require('./../services/TokenService')
 const EmailService = require('./../services/EmailService')
 
 function getUsuarioService() {
-    const usuarioService = new UsuarioService(UsuarioModel, EmailService, TokenService)
+    const usuarioService = new UsuarioService(
+        UsuarioModel, 
+        EmailService, 
+        TokenService
+    )
     return usuarioService
 }
 

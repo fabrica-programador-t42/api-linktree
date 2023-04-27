@@ -1,16 +1,13 @@
 const nodemailer = require('nodemailer')
 const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_SERVER,
-    port: process.env.SMTP_PORT,
-    secure: true, // true for 465, false for other ports
-    auth: {
-        user: process.env.SMTP_EMAIL, // generated ethereal user
-        pass: process.env.SMTP_SENHA, // generated ethereal password
-    },
+  host: process.env.SMTP_SERVER,
+  port: process.env.SMTP_PORT,
+  secure: true, // true for 465, false for other ports
+  auth: {
+    user: process.env.SMTP_EMAIL, // generated ethereal user
+    pass: process.env.SMTP_SENHA, // generated ethereal password
+  },
 });
-
-
-
 function enviarTokenRecuperarSenha(email, token) {
   transporter.sendMail({
     from: '"Api Link - T42" admin@lambdatech.com.br', // sender address
@@ -26,6 +23,6 @@ function enviarTokenRecuperarSenha(email, token) {
 
 
 module.exports = {
-    enviarTokenRecuperarSenha
+  enviarTokenRecuperarSenha
 }
 

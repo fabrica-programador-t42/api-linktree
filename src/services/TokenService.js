@@ -7,7 +7,11 @@ function gerarToken(conteudo) {
     return token
 }
 
+function verificarToken(token){
+    return jwt.verify(token, senha) //devolve o email se for valido
+}
 
 module.exports = {
-    gerarToken
+    gerarToken,
+    verificarToken
 }
