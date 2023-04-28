@@ -51,6 +51,11 @@ module.exports = Object.freeze({
             mensagem: 'Link não encontrado',
             statusCode: 400,
             code: 'USU0005'
+        },
+        loginInvalido : {
+            mensagem: 'Usuario ou Senha Incorretos',
+            statusCode: 401,
+            code: 'USU0006'
         }
     }
 })

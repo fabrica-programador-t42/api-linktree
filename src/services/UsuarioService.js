@@ -8,12 +8,57 @@ class UsuarioService extends BaseService {
         super(model)
         this.emailService = emailService
         this.tokenService = tokenService
+        this.salt = bcrypt.genSaltSync(SALT_ROUNDS)
+    }
+    async login(email, senha) {
+        const usuario = await this.model.findOne({ email })
+
+        if (!usuario || !usuario._id) {
+            throw erros.usuario.loginInvalido
+        }
+
+        const ehValido = bcrypt.compareSync(senha, usuario.senha)
+
+        if(!ehValido) {
+            throw erros.usuario.loginInvalido
+        }
+
+        const tokenDeSessao = this.tokenService.gerarToken({
+            _id: usuario._id,
+            email: usuario.email
+        })
+
+        return {
+            token: tokenDeSessao,
+            nome: usuario.nome,
+            email: usuario.email
+        }
+    }
+    async atualizarSenha(token, novaSenha) {
+        const email = this.tokenService
+            .verificarToken(token)
+
+        const usuario = await this.model
+            .findOne({ email })
+
+        if (!usuario || !usuario._id) {
+            throw erros.usuario
+                .usuarioNaoEncontrado
+        }
+        const hash = bcrypt.hashSync(
+            novaSenha,
+            this.salt
+        )
+        usuario.senha = hash
+        const atualizado = await this.atualizar(
+            usuario._id, usuario)
+        return atualizado
     }
 
     async recuperarSenha(email) {
         const usuario = await this.model.findOne({ email })
 
-        if(!usuario || !usuario._id) {
+        if (!usuario || !usuario._id) {
             throw erros.usuario.usuarioNaoEncontrado
         }
 
