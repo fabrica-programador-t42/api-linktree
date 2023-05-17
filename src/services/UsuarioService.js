@@ -1,7 +1,7 @@
 const erros = require('../errors')
 const bcrypt = require('bcrypt')
 const BaseService = require('./BaseService')
-const SALT_ROUNDS = 10
+const SALT_ROUNDS = 50
 
 class UsuarioService extends BaseService {
     constructor(model, emailService, tokenService) {
@@ -56,14 +56,21 @@ class UsuarioService extends BaseService {
     }
 
     async recuperarSenha(email) {
-        const usuario = await this.model.findOne({ email })
+        const usuario = await this.model
+            .findOne({ email })
 
         if (!usuario || !usuario._id) {
-            throw erros.usuario.usuarioNaoEncontrado
+            throw erros.usuario
+                .usuarioNaoEncontrado
         }
 
-        const token = this.tokenService.gerarToken(usuario.email)
-        await this.emailService.enviarTokenRecuperarSenha(usuario.email, token)
+        const token = this.tokenService
+            .gerarToken(usuario.email)
+        await this.emailService
+            .enviarTokenRecuperarSenha(
+                usuario.email, 
+                token
+            )
 
         return 'Código enviado no Email :)'
     }
@@ -79,7 +86,7 @@ class UsuarioService extends BaseService {
 
     async criarUsuario(dados) {
         try {
-            const hash = bcrypt.hashSync(dados.senha, SALT_ROUNDS);
+            const hash = bcrypt.hashSync(dados.senha, 15);
             const dadosFormatados = {
                 nome: dados.nome,
                 email: dados.email,

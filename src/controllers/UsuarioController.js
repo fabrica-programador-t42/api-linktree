@@ -6,7 +6,8 @@ class UsuarioController {
     async login(req, res) {
         try {
             const { email, senha } = req.body
-            const resultado = await this.usuarioService.login(email, senha)
+            const resultado = await this.usuarioService
+                .login(email, senha)
             return res.status(200).send(resultado)
         } catch (error) {
             console.log(error)
