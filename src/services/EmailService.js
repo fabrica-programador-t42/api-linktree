@@ -10,13 +10,13 @@ const transporter = nodemailer.createTransport({
 });
 function enviarTokenRecuperarSenha(email, token) {
   transporter.sendMail({
-    from: '"Api Link - T42" admin@lambdatech.com.br', // sender address
+    from: '"Api Link - T42" carlos.pereira@provi.com.br', // sender address
     to: email, // list of receivers
     subject: "Recuperação de senha", // Subject line
     text: "Recuperar senha", // plain text body
     html: `
     <div>
-        <a href="http://localhost:3000/recuperar-senha?token=${token}">Clique aqui para recuperar sua senha</a>
+        <a href="http://localhost:3000/nova-senha?token=${token}">Clique aqui para recuperar sua senha</a>
     </div>`, // html body
   }).then(re => console.log(re))
 }

@@ -1,7 +1,7 @@
 const erros = require('../errors')
 const bcrypt = require('bcrypt')
 const BaseService = require('./BaseService')
-const SALT_ROUNDS = 50
+const SALT_ROUNDS = 10
 
 class UsuarioService extends BaseService {
     constructor(model, emailService, tokenService) {
