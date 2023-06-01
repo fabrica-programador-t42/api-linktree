@@ -90,6 +90,7 @@ class UsuarioController {
       const resultado = await this.usuarioService.adicionarLink(id, dados);
       return res.status(200).send(resultado);
     } catch (error) {
+      console.log(error);
       return res.status(error.statusCode || 500).send(error);
     }
   }
@@ -129,6 +130,15 @@ class UsuarioController {
       return res.status(200).send(resultado);
     } catch (error) {
       console.log(error);
+      return res.status(error.statusCode || 500).send(error);
+    }
+  }
+
+  async buscarLinks(req, res) {
+    try {
+      const resultado = await this.usuarioService.buscarLinks();
+      return res.status(200).send(resultado);
+    } catch (error) {
       return res.status(error.statusCode || 500).send(error);
     }
   }
